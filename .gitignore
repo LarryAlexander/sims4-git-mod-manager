@@ -1,6 +1,30 @@
 # Sims 4 Git Configuration for CurseForge Users
 # Created: August 2025
 
+# Node.js and Electron
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+dist/
+build/
+*.tsbuildinfo
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
 # =============================================================================
 # CACHE AND TEMPORARY FILES - These should never be tracked
 # =============================================================================
