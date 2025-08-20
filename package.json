@@ -1,0 +1,86 @@
+{
+  "name": "sims4-git-mod-manager",
+  "version": "0.1.0",
+  "description": "Revolutionary mod management combining CurseForge convenience with Git version control for The Sims 4",
+  "main": "dist/main/main.js",
+  "author": "Larry Alexander",
+  "license": "MIT",
+  "homepage": "https://github.com/LarryAlexander/sims4-git-mod-manager",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LarryAlexander/sims4-git-mod-manager.git"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "dev": "concurrently \"npm run dev:main\" \"npm run dev:renderer\"",
+    "dev:main": "tsc -p tsconfig.main.json && electron dist/main/main.js",
+    "dev:renderer": "vite",
+    "build": "npm run build:main && npm run build:renderer",
+    "build:main": "tsc -p tsconfig.main.json",
+    "build:renderer": "tsc && vite build",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder",
+    "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "lint:fix": "eslint src --ext ts,tsx --fix",
+    "type-check": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/node": "^20.8.0",
+    "@types/react": "^18.2.31",
+    "@types/react-dom": "^18.2.14",
+    "@types/uuid": "^9.0.5",
+    "@typescript-eslint/eslint-plugin": "^6.7.5",
+    "@typescript-eslint/parser": "^6.7.5",
+    "@vitejs/plugin-react": "^4.1.0",
+    "concurrently": "^8.2.2",
+    "electron": "^25.9.0",
+    "electron-builder": "^24.6.4",
+    "eslint": "^8.51.0",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.3",
+    "typescript": "^5.2.2",
+    "vite": "^4.4.11"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.14.14",
+    "@mui/material": "^5.14.14",
+    "@reduxjs/toolkit": "^1.9.7",
+    "axios": "^1.5.1",
+    "better-sqlite3": "^8.7.0",
+    "electron-is-dev": "^2.0.0",
+    "electron-store": "^8.1.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-redux": "^8.1.3",
+    "react-router-dom": "^6.16.0",
+    "simple-git": "^3.20.0",
+    "uuid": "^9.0.1"
+  },
+  "build": {
+    "appId": "com.larryalexander.sims4-git-mod-manager",
+    "productName": "Sims 4 Git Mod Manager",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "package.json"
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "assets/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "deleteAppDataOnUninstall": true
+    }
+  }
+}
