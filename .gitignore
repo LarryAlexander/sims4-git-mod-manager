@@ -1,0 +1,143 @@
+# Sims 4 Git Configuration for CurseForge Users
+# Created: August 2025
+
+# =============================================================================
+# CACHE AND TEMPORARY FILES - These should never be tracked
+# =============================================================================
+
+# Game caches - these are regenerated automatically
+cachestr/
+onlinethumbnailcache/
+localsimtexturecache.package
+localthumbcache.package
+
+# Lock files
+UserData.lock
+
+# Log files - these change constantly and contain sensitive info
+*.log
+Config.log
+ReticulatedSplinesView
+Andirz_SmartCoreScript_LoggingInfo.log
+WickedWhimsInfoLog.log
+WonderfulWhimsInfoLog.log
+Basemental*.log
+lot51_*.log
+mc_cmd_center.log
+SCCO_Log.log
+NC4T_*.log
+DQuiet_SimControlHub.log
+
+# Exception reports - useful to keep for debugging but they're large
+lastException*.txt
+mc_lastexception.html
+BE-ExceptionReport*.html
+WickedWhims_*_Exception.txt
+
+# Database files that change frequently
+clientDB.package
+avatarcache.package
+accountDataDB.package
+houseDescription-client.package
+
+# Notification files
+notify.glob
+
+# =============================================================================
+# PERSONAL/SENSITIVE DATA - Never commit these
+# =============================================================================
+
+# Save files - contain personal gameplay data
+saves/
+*.save
+*.backup
+
+# Screenshots and recordings - personal content
+Screenshots/
+Recorded Videos/
+
+# Personal tray items and lots
+Tray/
+
+# Personal settings - these vary by user
+Options.ini
+UserSetting.ini
+GameConfig.ini
+
+# Connection and user data
+ConnectionStatus.txt
+Events.ini
+GameVersion.txt
+
+# =============================================================================
+# CONTENT MANIFEST - Track these for mod compatibility
+# =============================================================================
+
+# Keep content manifests for troubleshooting
+!content/*.contentmanifest
+
+# =============================================================================
+# LARGE BINARY FILES - Skip these to keep repo size down
+# =============================================================================
+
+# GPU benchmark results
+GPU*.txt
+
+# Large package files (but allow small mod files)
+*.package
+# Exception: Allow mod files specifically
+!Mods/**/*.package
+!Mods/**/*.ts4script
+!Mods/**/*.cfg
+
+# Custom music - too large for Git
+Custom Music/
+
+# Configuration override - system specific
+ConfigOverride/
+
+# =============================================================================
+# DEVELOPMENT AND TEMP FILES
+# =============================================================================
+
+# Windows thumbnails
+Thumbs.db
+ehthumbs.db
+
+# System folders
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+.fseventsd
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# =============================================================================
+# GIT SPECIFIC
+# =============================================================================
+
+# Keep git folder structure
+!.git/
+!.github/
+!.gitignore
+!.gitattributes
+
+# =============================================================================
+# NOTES FOR USERS
+# =============================================================================
+
+# To track a specific ignored file:
+# git add -f path/to/file
+
+# To see what's ignored:
+# git status --ignored
+
+# To temporarily ignore changes to a tracked file:
+# git update-index --skip-worktree path/to/file
