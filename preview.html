@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sims 4 Mod Manager - Preview</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: #0a0a0a;
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            height: 100vh;
+            overflow: hidden;
+        }
+        
+        .app {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+        
+        .titlebar {
+            background: #1976d2;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 16px;
+            font-size: 14px;
+            color: white;
+            -webkit-app-region: drag;
+        }
+        
+        .main-container {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+        
+        .sidebar {
+            width: 280px;
+            background: #1a1a1a;
+            border-right: 1px solid #333;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .sidebar-header {
+            padding: 24px;
+            border-bottom: 1px solid #333;
+        }
+        
+        .sidebar-title {
+            color: #00b4d8;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+        
+        .sidebar-subtitle {
+            color: #888;
+            font-size: 12px;
+        }
+        
+        .sidebar-nav {
+            flex: 1;
+            padding: 8px;
+        }
+        
+        .nav-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            margin: 2px 0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .nav-item:hover {
+            background: rgba(255,255,255,0.05);
+        }
+        
+        .nav-item.active {
+            background: #00b4d8;
+            color: white;
+        }
+        
+        .nav-icon {
+            width: 20px;
+            margin-right: 12px;
+        }
+        
+        .nav-badge {
+            margin-left: auto;
+            background: #7209b7;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+        }
+        
+        .content {
+            flex: 1;
+            background: #0a0a0a;
+            padding: 24px;
+            overflow: auto;
+        }
+        
+        .page-title {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        
+        .page-subtitle {
+            color: #888;
+            margin-bottom: 24px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 32px;
+        }
+        
+        .stat-card {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 20px;
+        }
+        
+        .stat-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        
+        .stat-icon {
+            margin-right: 8px;
+            color: #00b4d8;
+        }
+        
+        .stat-value {
+            font-size: 36px;
+            font-weight: bold;
+            color: #00b4d8;
+            margin-bottom: 4px;
+        }
+        
+        .stat-label {
+            color: #888;
+            font-size: 14px;
+        }
+        
+        .mod-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 16px;
+            margin-top: 24px;
+        }
+        
+        .mod-card {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 16px;
+            transition: transform 0.2s;
+        }
+        
+        .mod-card:hover {
+            transform: translateY(-2px);
+        }
+        
+        .mod-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        
+        .mod-icon {
+            width: 32px;
+            height: 32px;
+            background: #00b4d8;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            font-size: 16px;
+        }
+        
+        .mod-name {
+            font-weight: 600;
+            flex: 1;
+        }
+        
+        .mod-status {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            margin-bottom: 8px;
+        }
+        
+        .enabled {
+            background: rgba(76, 175, 80, 0.2);
+            color: #4caf50;
+        }
+        
+        .disabled {
+            background: rgba(158, 158, 158, 0.2);
+            color: #9e9e9e;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 16px;
+            border-top: 1px solid #333;
+            color: #888;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <!-- Title Bar -->
+        <div class="titlebar">
+            <span>Sims 4 Mod Manager</span>
+            <div>⚬ ⚫ ✕</div>
+        </div>
+        
+        <!-- Main Container -->
+        <div class="main-container">
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <div class="sidebar-header">
+                    <div class="sidebar-title">🎮 Sims 4 Manager</div>
+                    <div class="sidebar-subtitle">Git-powered mod management</div>
+                </div>
+                
+                <div class="sidebar-nav">
+                    <div class="nav-item active">
+                        <span class="nav-icon">📊</span>
+                        Dashboard
+                    </div>
+                    <div class="nav-item">
+                        <span class="nav-icon">📦</span>
+                        Mod Library
+                        <span class="nav-badge">42</span>
+                    </div>
+                    <div class="nav-item">
+                        <span class="nav-icon">☁️</span>
+                        CurseForge
+                    </div>
+                    <div class="nav-item">
+                        <span class="nav-icon">📜</span>
+                        History
+                    </div>
+                    <div class="nav-item">
+                        <span class="nav-icon">⚙️</span>
+                        Settings
+                    </div>
+                </div>
+                
+                <div class="footer">
+                    v1.0.0 • Made with ❤️
+                </div>
+            </div>
+            
+            <!-- Main Content -->
+            <div class="content">
+                <h1 class="page-title">Dashboard</h1>
+                <p class="page-subtitle">Overview of your Sims 4 mods and recent activity</p>
+                
+                <!-- Stats Grid -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <span class="stat-icon">📈</span>
+                            <span>Total Mods</span>
+                        </div>
+                        <div class="stat-value">42</div>
+                        <div class="stat-label">Managed files</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <span class="stat-icon">✅</span>
+                            <span>Active Mods</span>
+                        </div>
+                        <div class="stat-value">38</div>
+                        <div class="stat-label">Currently enabled</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <span class="stat-icon">⛔</span>
+                            <span>Disabled Mods</span>
+                        </div>
+                        <div class="stat-value">4</div>
+                        <div class="stat-label">Currently disabled</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <span class="stat-icon">⚠️</span>
+                            <span>Conflicts</span>
+                        </div>
+                        <div class="stat-value">0</div>
+                        <div class="stat-label">Potential issues</div>
+                    </div>
+                </div>
+                
+                <!-- Recent Mods Preview -->
+                <h3 style="margin-bottom: 16px;">Recent Mods</h3>
+                <div class="mod-grid">
+                    <div class="mod-card">
+                        <div class="mod-header">
+                            <div class="mod-icon">📦</div>
+                            <div class="mod-name">MC Command Center</div>
+                        </div>
+                        <div class="mod-status enabled">Enabled</div>
+                        <div style="color: #888; font-size: 14px;">by Deaderpool</div>
+                        <div style="color: #888; font-size: 12px; margin-top: 8px;">Size: 2.1 MB</div>
+                    </div>
+                    
+                    <div class="mod-card">
+                        <div class="mod-header">
+                            <div class="mod-icon">🎨</div>
+                            <div class="mod-name">UI Cheats Extension</div>
+                        </div>
+                        <div class="mod-status enabled">Enabled</div>
+                        <div style="color: #888; font-size: 14px;">by weerbesu</div>
+                        <div style="color: #888; font-size: 12px; margin-top: 8px;">Size: 156 KB</div>
+                    </div>
+                    
+                    <div class="mod-card">
+                        <div class="mod-header">
+                            <div class="mod-icon">🏠</div>
+                            <div class="mod-name">Better Build Buy</div>
+                        </div>
+                        <div class="mod-status enabled">Enabled</div>
+                        <div style="color: #888; font-size: 14px;">by TwistedMexi</div>
+                        <div style="color: #888; font-size: 12px; margin-top: 8px;">Size: 89 KB</div>
+                    </div>
+                    
+                    <div class="mod-card">
+                        <div class="mod-header">
+                            <div class="mod-icon">👗</div>
+                            <div class="mod-name">Custom Content Hair Pack</div>
+                        </div>
+                        <div class="mod-status disabled">Disabled</div>
+                        <div style="color: #888; font-size: 14px;">by Various Authors</div>
+                        <div style="color: #888; font-size: 12px; margin-top: 8px;">Size: 45 MB</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
